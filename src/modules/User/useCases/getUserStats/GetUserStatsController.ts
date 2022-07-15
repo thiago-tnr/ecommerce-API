@@ -6,11 +6,7 @@ export class GetUserStatsController {
     constructor(private getUserStatusService: GetUserStatsService){}
 
     async handle(request: Request, response: Response){
-        try {
-            const userDataStats = await this.getUserStatusService.execute();
-            response.status(200).json(userDataStats)
-        } catch (err) {
-            response.json(err)
-        }
+        const userDataStats = await this.getUserStatusService.execute();
+        return response.status(200).json(userDataStats)
     }
 }

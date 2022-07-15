@@ -9,7 +9,7 @@ export const indexRoutes = Router();
 indexRoutes.get('/ping', (request, response) => {
     return response.json({message: "pong"});
 })
-
+console.log('first')
 indexRoutes.use('/user', userRoutes)
 indexRoutes.use('/login', authRouter);
 indexRoutes.use('/products',verifyTokenAndAdmin, productsRouter)

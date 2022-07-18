@@ -1,4 +1,4 @@
-import Error from "../../../../error/AppError"
+import AppError from "../../../../error/AppError"
 import User from "../../infra/model/User"
 
 interface Request {
@@ -12,7 +12,7 @@ export default class GetUserService {
             if (findOneUserById) {
                 return findOneUserById
             } else {
-                throw new Error("User not found", 404)
+                throw new AppError("User not found", 404)
             }
         }
     }

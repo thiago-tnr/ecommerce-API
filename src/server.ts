@@ -24,6 +24,6 @@ app.use((err:Error, request:Request, response:Response, next:NextFunction)=>{
 
 ConnectionDB();
 
-app.listen(3130, () => {
+app.listen(3030, () => {
     console.log("Server is running !!!");
 })

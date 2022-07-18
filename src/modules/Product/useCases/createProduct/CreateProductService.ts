@@ -1,4 +1,4 @@
-import Error from "../../../../error/AppError"
+import AppError from "../../../../error/AppError"
 import Product from "../../infra/model/Product"
 
 interface Request {
@@ -17,6 +17,12 @@ interface Request {
  */
 export class CreateProductsService {
    public async execute({title, desc, img, categories, size, color, price, inStock}: Request){
+
+        const checkProductTitleExists = await Product.findOne({title})
+
+        if (checkProductTitleExists) {
+            throw new AppError('Title already used', 409)
+        }
         const newProduct = new Product({
             title,
             desc,
@@ -31,7 +37,7 @@ export class CreateProductsService {
             const createNewProduct = await newProduct.save()
             return createNewProduct
         } else {
-            throw new Error("Not possible to create a product", 403)
+            throw new AppError("Not possible to create a product", 403)
         }
    }
 }

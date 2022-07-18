@@ -4,5 +4,9 @@ declare namespace Express{
             id:string
             isAdmin:string
         }
+        product:{
+            id:string
+        }
+
     }
 }

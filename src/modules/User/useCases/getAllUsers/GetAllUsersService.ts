@@ -1,4 +1,4 @@
-import Error from "../../../../error/AppError"
+import AppError from "../../../../error/AppError"
 import User from "../../infra/model/User"
 
 export default class GetAllUsersService {
@@ -8,7 +8,7 @@ export default class GetAllUsersService {
         if (findAllUsers) {
             return findAllUsers
         } else {
-            throw new Error("Users not found", 404)
+            throw new AppError("Users not found", 404)
         }
     }
 }

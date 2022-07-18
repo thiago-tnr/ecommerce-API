@@ -1,4 +1,4 @@
-import Error from "../../../../error/AppError";
+import AppError from "../../../../error/AppError";
 import User from "../../infra/model/User";
 import CryptoJs from 'crypto-js';
 import dotenv from 'dotenv';
@@ -17,7 +17,7 @@ export default class CreateUserService {
         const checkUserNameExists = await User.findOne({username: name})
 
         if (checkUserExists && checkUserNameExists) {
-            throw new Error('Email adress or userName already used', 409)
+            throw new AppError('Email adress or userName already used', 409)
         }
         
         if (name && email && password ||isAdmin) {

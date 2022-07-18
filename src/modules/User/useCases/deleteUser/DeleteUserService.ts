@@ -1,4 +1,4 @@
-import Error from "../../../../error/AppError"
+import AppError from "../../../../error/AppError"
 import User from "../../infra/model/User"
 
 interface Request {
@@ -11,7 +11,7 @@ export default class DeleteUserService{
             const deletedUser = await User.findByIdAndDelete(id)  
 
             if(deletedUser === null) {
-                throw new Error("Not possible to delete user", 500)
+                throw new AppError("Not possible to delete user", 500)
             }
             
             return deletedUser;

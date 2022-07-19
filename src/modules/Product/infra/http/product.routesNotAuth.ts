@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { getAllProductsController } from "../../useCases/getAllProduct";
 import { getProductController } from "../../useCases/getProduct";
 
 
@@ -10,4 +11,8 @@ productsRouterNotAuth.get('/ping', (request, response) => {
 
 productsRouterNotAuth.get('/product/:id', (request, response) => {
     return getProductController.handle(request, response)
+})
+
+productsRouterNotAuth.get('/products/all', (request, response) => {
+    return getAllProductsController.handle(request, response)
 })

@@ -1,7 +1,13 @@
 import { Router } from "express";
+import { verifyToken } from "../../../../middleware/middleware";
+import { createCartController } from "../../useCases/createCart";
 
-export const routes = Router();
+export const cartRoutes = Router();
 
-routes.get('/ping', (request, response) => {
+cartRoutes.get('/ping', (request, response) => {
     return response.json({message: "pong"});
+})
+
+cartRoutes.post('/new', verifyToken, (request, response) =>{
+    return createCartController.handle(request, response)
 })

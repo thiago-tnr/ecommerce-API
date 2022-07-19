@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import AppError from "../../../../error/AppError";
+import AppError from "../../../../helpers/error/AppError";
 import { UpdateProductService } from "./UpdateProdcutService";
 
 

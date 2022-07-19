@@ -1,4 +1,4 @@
-import AppError from "../../../../error/AppError"
+import AppError from "../../../../helpers/error/AppError"
 import Product from "../../infra/model/Product"
 
 interface Request {
@@ -14,6 +14,8 @@ interface Request {
 /**
  * [] correção de upload de imagem - FireBase ou S3
  * [] salvar o link apenas no bando de dados
+ * [] salvar a quantidade de estoque obrigatóriamente
+ * [] dar saída a cada venda
  */
 export class CreateProductsService {
    public async execute({title, desc, img, categories, size, color, price, inStock}: Request){

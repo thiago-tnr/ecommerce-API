@@ -1,4 +1,4 @@
-import AppError from "../../../../error/AppError";
+import AppError from "../../../../helpers/error/AppError";
 import User from "../../infra/model/User";
 import CryptoJs from 'crypto-js';
 import dotenv from 'dotenv';

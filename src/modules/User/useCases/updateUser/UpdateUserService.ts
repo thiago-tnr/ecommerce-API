@@ -1,5 +1,5 @@
 import CryptoJs from 'crypto-js';
-import AppError from '../../../../error/AppError';
+import AppError from '../../../../helpers/error/AppError';
 import User from '../../infra/model/User';
 
 interface IUpdateUser{

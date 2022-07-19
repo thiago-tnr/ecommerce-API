@@ -1,4 +1,4 @@
-import AppError from "../../../../error/AppError";
+import AppError from "../../../../helpers/error/AppError";
 import User from "../../infra/model/User";
 import CryptoJs from 'crypto-js';
 import dotenv from 'dotenv';
@@ -19,7 +19,7 @@ export default class CreateUserService {
         if (checkUserExists && checkUserNameExists) {
             throw new AppError('Email adress or userName already used', 409)
         }
-        
+       
         if (name && email && password ||isAdmin) {
             const newUser = new User({
                 username: name,
@@ -28,6 +28,7 @@ export default class CreateUserService {
                 process.env.PASS_SEC as string).toString(),
                 isAdmin
             })
+            
             const savedUser = await newUser.save()
             return savedUser;
         }

@@ -1,4 +1,4 @@
-import AppError from "../../../../error/AppError";
+import AppError from "../../../../helpers/error/AppError";
 import Product from "../../infra/model/Product";
    
 interface Request {

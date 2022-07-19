@@ -3,7 +3,7 @@ import 'express-async-errors';
 import { ConnectionDB } from "./database/connection";
 import { indexRoutes } from "./routes/index.routes";
 import bodyParser from "body-parser";
-import AppError from "./error/AppError";
+import AppError from "./helpers/error/AppError";
 const app = express();
 
 app.use(express.json());

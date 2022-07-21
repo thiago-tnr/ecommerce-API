@@ -14,6 +14,6 @@ export class DeleteProductContrller {
         }
 
         const deleteProductById = await this.deleteProductService.execute({productId})
-        return response.json({"product deleted" : deleteProductById})
+        return response.json({"Product successfully deleted" : deleteProductById})
     }    
 }

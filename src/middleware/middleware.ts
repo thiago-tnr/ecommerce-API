@@ -49,6 +49,8 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction) =>{
 export const verifyTokenAndAuthorization = (req: Request, res: Response, next: NextFunction) => {
     verifyToken(req, res, () => {
       if (req.user.id === req.params.id || req.user.isAdmin) {
+        console.log(req.user.id)
+        console.log(req.params.id)
         next();
       } else {
         res.status(403).json("You are not alowed to do that!");
@@ -61,7 +63,7 @@ export const verifyTokenAndAdmin = (req: Request, res: Response, next: NextFunct
       if (req.user.isAdmin) {
         next();
       } else {
-        res.status(403).json("You are not alowed to do that!");
+        res.status(403).json("Only admins alowed to do that!");
       }
     });
   };

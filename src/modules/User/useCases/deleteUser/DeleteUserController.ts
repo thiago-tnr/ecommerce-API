@@ -8,7 +8,7 @@ export class DeleteUserController {
         const {id} = request.params;
         const delteUserById = await this.deleteUserService.execute({id})
         if (delteUserById) {
-            return response.status(200).json({message: "User deleted sucssesfully"})
+            return response.status(200).json({message: "User successfully deleted"})
         }
     }
 }

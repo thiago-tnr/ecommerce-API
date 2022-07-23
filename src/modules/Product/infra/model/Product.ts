@@ -26,7 +26,3 @@ const ProductsSchema = new Schema<ProductType>({
 const modelName: string = "Product";
 
 export default mongoose.model<ProductType>(modelName, ProductsSchema)
-
-// export default (connection && connection.models[modelName])
-//     ? connection.models[modelName]
-//     : model<ProductType>(modelName, ProductsSchema)

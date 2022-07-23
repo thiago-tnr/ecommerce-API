@@ -1,4 +1,4 @@
-import { connection, model, Schema } from "mongoose";
+import mongoose, { connection, model, Schema } from "mongoose";
 
 type CartType = {
     userId: string,
@@ -29,6 +29,4 @@ const CartSchema = new Schema<CartType>({
 
 const modelName: string = "Cart";
 
-export default (connection && connection.models[modelName])
-    ? connection.models[modelName]
-    : model<CartType>(modelName, CartSchema)
+export default mongoose.model<CartType>(modelName, CartSchema)

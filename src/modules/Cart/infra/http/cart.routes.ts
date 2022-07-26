@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { verifyToken, verifyTokenAndAuthorization } from "../../../../middleware/middleware";
+import { verifyToken, verifyTokenAndAdmin, verifyTokenAndAuthorization } from "../../../../middleware/middleware";
+import { getAllUsersController } from "../../../User/useCases/getAllUsers";
 import { createCartController } from "../../useCases/createCart";
 import { deleteCartController } from "../../useCases/deleteCart";
 import { getUserCartContrller } from "../../useCases/getCartUSer";
@@ -20,4 +21,8 @@ cartRoutes.delete('/delete/:id', verifyTokenAndAuthorization, (request, response
 
 cartRoutes.get('/find-cart/:userId', verifyTokenAndAuthorization, (request, response) =>{
     return getUserCartContrller.handle(request, response)
+})
+
+cartRoutes.get('/all-carts', verifyTokenAndAdmin, (request, response) => {
+    return getAllUsersController.handle(request, response)
 })

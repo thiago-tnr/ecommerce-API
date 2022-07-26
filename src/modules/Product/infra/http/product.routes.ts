@@ -3,14 +3,18 @@ import { createProductController } from "../../useCases/createProduct";
 import { deleteProductController } from "../../useCases/deleteProduct";
 import { getProductController } from "../../useCases/getProduct";
 import { updateProdcutController } from "../../useCases/updateProduct";
+import multer from "multer";
 
 export const productsRouter = Router();
+const upload = multer({dest:"./tmp"});
 
 productsRouter.get('/ping', (request, response) => {
     return response.json({message: "pong"});
 })
 
-productsRouter.post('/', (request, response) =>{
+productsRouter.post('/', upload.single("img"), (request, response) =>{
+    const {img}:any = request;
+    console.log(img)
     return createProductController.handle(request, response)
 })
 

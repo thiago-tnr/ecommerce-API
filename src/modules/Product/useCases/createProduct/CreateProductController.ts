@@ -14,9 +14,9 @@ export class CreateProductController {
      const typeSize = typeof(size)
      const typeColor = typeof(price)
 
-     if (typeCategories !== "object" && typeSize !== "object" && typeColor !== "object"){
-          return response.status(404).json({message: "Categories, size and color must be of the type object"})
-     }
+     // if (typeCategories !== "object" && typeSize !== "object" && typeColor !== "object"){
+     //      return response.status(404).json({message: "Categories, size and color must be of the type object"})
+     // }
 
      const createProduct = await this.createProductsService.execute({title, 
      desc, img, categories, size, color, price, inStock})

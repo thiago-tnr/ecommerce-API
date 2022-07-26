@@ -12,7 +12,6 @@ export class GetAllCartsController {
         if(!cart) {
             return response.status(404).json(cart)
         }
-
-        r
+        return response.status(200)
     }
 }

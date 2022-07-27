@@ -1,9 +1,10 @@
 import { Router } from "express";
 import { verifyToken, verifyTokenAndAdmin, verifyTokenAndAuthorization } from "../../../../middleware/middleware";
-import { getAllUsersController } from "../../../User/useCases/getAllUsers";
 import { createCartController } from "../../useCases/createCart";
 import { deleteCartController } from "../../useCases/deleteCart";
+import { getAllCartsController } from "../../useCases/getAllCarts";
 import { getUserCartContrller } from "../../useCases/getCartUSer";
+import { updateCartController } from "../../useCases/updateCart";
 
 export const cartRoutes = Router();
 
@@ -24,5 +25,9 @@ cartRoutes.get('/find-cart/:userId', verifyTokenAndAuthorization, (request, resp
 })
 
 cartRoutes.get('/all-carts', verifyTokenAndAdmin, (request, response) => {
-    return getAllUsersController.handle(request, response)
+    return getAllCartsController.handle(request, response)
+})
+
+cartRoutes.put('/update/:id', verifyTokenAndAuthorization, (request, response) =>{
+    return updateCartController.handle(request, response)
 })

@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import LoginUserService from "./LoginUserService";
 import jwt from 'jsonwebtoken'
-
 export class LoginUserController {
 
     constructor(private loginUserService: LoginUserService){}

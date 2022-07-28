@@ -3,6 +3,9 @@ import Jwt, { decode } from "jsonwebtoken";
 import dotenv from "dotenv"
 
 dotenv.config();
+/**
+ * [] implementar o refresh token
+ */
 
 // export const middlewareAuth = {
 //     private: (req: Request, res: Response, next: NextFunction) => {

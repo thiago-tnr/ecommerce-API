@@ -1,17 +1,17 @@
 import { CreateCartService } from "./CreateCartService"
 import { Request, Response } from "express";
-
+import { isEmpty } from "../../../../helpers/isEmpty/Empty";
 
 export class CreateCartController {
     constructor(private createCartService: CreateCartService){}
     async handle(request: Request, response: Response){
-        const {userId} = request.body
-        const {products:{productId, quantity}} = request.body
-
-        if(Object.entries(request.body).length === 0) {
+        
+        if(isEmpty(request.body)) {
             return response.status(404).json({message: "No data body defined, cart is empty"})
         }
         
+        const {userId, products:{productId, quantity}} = request.body
+
         if(!(userId && productId && quantity)) {
             return response.status(404).json({message: "Missing JSON args!"})
         }

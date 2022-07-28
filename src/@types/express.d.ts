@@ -7,6 +7,5 @@ declare namespace Express{
         product:{
             id:string
         }
-
     }
 }

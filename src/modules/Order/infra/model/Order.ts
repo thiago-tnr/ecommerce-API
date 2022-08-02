@@ -1,4 +1,4 @@
-import { connection, model, Schema } from "mongoose";
+import mongoose, { connection, model, Schema } from "mongoose";
 
 type OrderType = {
     userId: string,
@@ -32,6 +32,4 @@ const OrderSchema = new Schema<OrderType>({
 
 const modelName: string = "Order";
 
-export default (connection && connection.models[modelName])
-  ? connection.models[modelName]
-  : model<OrderType>(modelName, OrderSchema)
+export default mongoose.model<OrderType>(modelName, OrderSchema)

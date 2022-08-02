@@ -39,7 +39,7 @@ export class CreateProductsService {
             const createNewProduct = await newProduct.save()
             return createNewProduct
         } else {
-            throw new AppError("Not possible to create a product", 403)
+            throw new AppError("Not possible to create a product", 401)
         }
    }
 }

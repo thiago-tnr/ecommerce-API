@@ -23,10 +23,12 @@ export class CreateOrderService {
             address
         })
 
-        if(!newOrder){
-            throw new AppError('Order not created', 401)
+        if(newOrder){
+            const createNewOrder = await newOrder.save()
+            return createNewOrder;
+        } else {
+            throw new AppError("Order not created", 401)
         }
         
-        return newOrder;
     }
 } 

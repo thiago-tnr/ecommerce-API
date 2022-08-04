@@ -32,6 +32,22 @@ dotenv.config();
 //     }
 // }
 
+export const refreshToken = (req: Request, res: Response, next: NextFunction) =>{
+  const refreshToken: any = req.body.refreshToken;
+  if (refreshToken) {
+      Jwt.verify(refreshToken, process.env.REFRESH_JWT_SEC as string, (err: any, user: any) => {
+          if (err) {
+              res.status(403).json("Invalid Token");
+          } else { 
+              const tokenRefreshed = Jwt.sign({name: user.name}, process.env.JWT_SEC, {expiresIn: '60s'})
+              return res.status(200).json({message : "Token refreshed sucessfuly", tokenRefreshed });
+          }
+      })
+  } else {
+      return res.status(401).json("You are not authenticated");
+  }
+}
+
 export const verifyToken = (req: Request, res: Response, next: NextFunction) =>{
     const authHeader: any = req.headers.authorization;
     if (authHeader) {

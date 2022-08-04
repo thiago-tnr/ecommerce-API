@@ -1,6 +1,8 @@
-import { response, Router } from "express";
+import { request, response, Router } from "express";
 import { verifyToken } from "../../../../middleware/middleware";
 import { createOrderController } from "../../useCases/createOrder";
+import { getAllOrdersController } from "../../useCases/getAllOrders";
+import { getMonthlyIncomeController } from "../../useCases/getMonthlyIncome";
 import { getUserOrderController } from "../../useCases/getOrder";
 import { updateOrderController } from "../../useCases/updateOrder";
 
@@ -21,3 +23,12 @@ orderRoutes.get('/find/:id', (request, response) =>{
 orderRoutes.put('/:id', (request, reseponse)=>{
     return updateOrderController.handle(request, reseponse)
 })
+
+orderRoutes.get('/all', (request, response) =>{
+    return getAllOrdersController.handle(request, response)
+})
+
+orderRoutes.get('/incomes', (request, response) =>{
+    return getMonthlyIncomeController.handle(request, response)
+})
+

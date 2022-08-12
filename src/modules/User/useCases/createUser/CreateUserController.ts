@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { UserVerificationService } from "../userVerification/UserVerificationService";
 import CreateUserService from "./CreateUserService";
 
 /**
@@ -9,12 +10,19 @@ import CreateUserService from "./CreateUserService";
  * [] validar email
  */
 export class CreateUserController {
-    constructor(private createUserService: CreateUserService){}
+    constructor(private createUserService: CreateUserService, private userVerificationService: UserVerificationService){}
     async handle (request: Request, response: Response) {
     const {name, isAdmin, email, password} = request.body;
     const user = await this.createUserService.execute({name, email, password, isAdmin});
-    user.password = undefined;
-    return response.status(201).json(user); 
+    console.log(user[0])
+    let userId = user[1].toString();
+
+    let sendEmail = await this.userVerificationService.execute({userId, email})
+    
+    if (sendEmail) {
+        return response.status(202).json({"message" : "PENDDING"}); 
+    }
   
     }
 }
+

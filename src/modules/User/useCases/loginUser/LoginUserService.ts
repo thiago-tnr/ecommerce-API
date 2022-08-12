@@ -17,6 +17,12 @@ export default class LoginUserService{
             
             const user = await User.findOne({email}) 
 
+            const userVerified = user.verified
+            
+            if (!userVerified) {
+                throw new AppError("Not possible to login, account not verified", 403)
+            }
+
             if (!user) {
                 throw new AppError("Email or password wrong, try again", 403)
             }

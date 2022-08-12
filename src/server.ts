@@ -2,8 +2,10 @@ import express, { NextFunction, Request, Response } from "express";
 import 'express-async-errors';
 import { ConnectionDB } from "./database/connection";
 import { indexRoutes } from "./routes/index.routes";
-import bodyParser from "body-parser";
 import AppError from "./helpers/error/AppError";
+import fs from "fs";
+import https from "https"
+
 const app = express();
 
 app.use(express.json());
@@ -24,6 +26,6 @@ app.use((err:Error, request:Request, response:Response, next:NextFunction)=>{
 
 ConnectionDB();
 
-app.listen(3030, () => {
+app.listen(3130, () => {
     console.log("Server is running !!!");
 })

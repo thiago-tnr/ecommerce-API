@@ -6,6 +6,7 @@ import { getAllUsersController } from "../../useCases/getAllUsers";
 import { getUserController } from "../../useCases/getUser";
 import { getUserStatsController } from "../../useCases/getUserStats";
 import { updateUserController } from "../../useCases/updateUser";
+import { userVerificationController } from "../../useCases/userVerification";
 
 export const userRoutes = Router();
 
@@ -38,6 +39,10 @@ userRoutes.get("/find-all-users", verifyTokenAndAdmin, async (request, response)
     return getAllUsersController.handle(request, response)
 })
 
-userRoutes.get("/user-stats", verifyTokenAndAdmin,async (request, response) => {
+userRoutes.get("/user-stats", verifyTokenAndAdmin, async (request, response) => {
    return getUserStatsController.handle(request, response)
+})
+
+userRoutes.get('/verify/:userId/:uniqueString', async (request, response) => {
+   return userVerificationController.handle(request, response)
 })

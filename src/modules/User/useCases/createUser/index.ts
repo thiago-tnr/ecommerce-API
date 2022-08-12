@@ -1,5 +1,7 @@
+import { UserVerificationService } from "../userVerification/UserVerificationService";
 import { CreateUserController } from "./CreateUserController";
 import CreateUserService from "./CreateUserService";
 
 const createUserService = new CreateUserService();
-export const createUserController = new CreateUserController(createUserService)
+const userVerificationService = new UserVerificationService();
+export const createUserController = new CreateUserController(createUserService, userVerificationService)

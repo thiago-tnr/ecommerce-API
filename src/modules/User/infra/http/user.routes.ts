@@ -7,6 +7,7 @@ import { getUserController } from "../../useCases/getUser";
 import { getUserStatsController } from "../../useCases/getUserStats";
 import { updateUserController } from "../../useCases/updateUser";
 import { userVerificationController } from "../../useCases/userVerification";
+import path from 'path';
 
 export const userRoutes = Router();
 
@@ -45,4 +46,10 @@ userRoutes.get("/user-stats", verifyTokenAndAdmin, async (request, response) => 
 
 userRoutes.get('/verify/:userId/:uniqueString', async (request, response) => {
    return userVerificationController.handle(request, response)
+})
+
+userRoutes.get('/verified/:message', async (request, response) => {
+
+   return response.sendFile(path.join(__dirname, "./../../../../view/verifiedError.html"))
+  
 })

@@ -7,6 +7,6 @@ authRouter.post('/', async (request, response) => {
    return loginUserController.handle(request, response)
 })
 
-authRouter.get('/verified/:id', async (request, response) => {
-   response.sendFile(path.join(__dirname, "./../../../../view/verified.html"))
+authRouter.get('/verified/:?error', async (request, response) => {
+   response.sendFile(path.join(__dirname, "./../../../../view/ververifiedErrorfied.html"))
 })

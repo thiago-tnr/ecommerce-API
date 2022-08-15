@@ -32,7 +32,7 @@ export class UserVerificationService{
             }
         })
 
-        const currentUrl = "https://localhost:3130/"
+        const currentUrl = "https://localhost:3030/"
         const uniqueString = (uuidv4() + userId)
         const mailOptions = {
             from: process.env.AUTH_EMAIL,

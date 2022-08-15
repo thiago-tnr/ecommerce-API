@@ -3,12 +3,12 @@ import 'express-async-errors';
 import { ConnectionDB } from "./database/connection";
 import { indexRoutes } from "./routes/index.routes";
 import AppError from "./helpers/error/AppError";
-import fs from "fs";
-import https from "https"
+
 
 const app = express();
 
 app.use(express.json());
+
 app.use(indexRoutes);
 app.use((err:Error, request:Request, response:Response, next:NextFunction)=>{
     if(err instanceof AppError){
@@ -26,6 +26,6 @@ app.use((err:Error, request:Request, response:Response, next:NextFunction)=>{
 
 ConnectionDB();
 
-app.listen(3130, () => {
+app.listen(3030, () => {
     console.log("Server is running !!!");
 })

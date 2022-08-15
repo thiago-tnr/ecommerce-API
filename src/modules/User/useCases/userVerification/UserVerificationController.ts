@@ -4,6 +4,7 @@ import moment from "moment-timezone";
 import User from "../../infra/model/User";
 import bcrypt from "bcrypt"
 import path from 'path';
+import { isEmpty } from "../../../../helpers/isEmpty/Empty";
 
 export class UserVerificationController{
     async handle(request: Request, response: Response ){
@@ -11,10 +12,10 @@ export class UserVerificationController{
 
         const userVerification = await UserVerification.find({userId})
 
-        if (!userVerification) {
-            let message = "Account record doesn't exists od has been verified already. Please sign up or log in"
-            return response.redirect(`/user/verified/error=true&message=${message}`)
-        }
+        if (isEmpty(userVerification)) {
+            let message = "Account record doesnt exists or has been verified already. Please sign up or log in"
+            return response.redirect(`/user/verified/${message}`)
+        } 
         
         const {expiresIn} = userVerification[0];
         let dateExpires = Date.parse(expiresIn.toString())

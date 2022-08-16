@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer'
 import dotenv from 'dotenv'
 import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcrypt"
-import UserVerification from '../../infra/model/UserVerification';
+import UserVerification from '../../infra/models/UserVerification';
 import { isEmpty } from '../../../../helpers/isEmpty/Empty';
 import AppError from '../../../../helpers/error/AppError';
 
@@ -13,7 +13,7 @@ interface Request {
     email: string,
 }
 
-export class UserVerificationService{
+export class CreateUserVerificationService{
     async execute({userId, email}: Request){
         const transporter = nodemailer.createTransport({
             service: "gmail",

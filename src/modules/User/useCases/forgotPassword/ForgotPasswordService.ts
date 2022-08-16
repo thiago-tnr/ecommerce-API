@@ -1,5 +1,5 @@
 import AppError from "../../../../helpers/error/AppError"
-import User from "../../infra/model/User"
+import User from "../../infra/models/User"
 
 
 
@@ -10,12 +10,6 @@ interface Request {
 export class ForgotPasswordService{
     async execute({userEmail}: Request){
 
-        const findUserByEmail = await User.findOne({email: userEmail})
      
-        if(!findUserByEmail) {
-            throw new AppError("User with this dosen't email already exists", 404)
-        }
-        
-
     }
 }

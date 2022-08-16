@@ -1,5 +1,5 @@
 import AppError from "../../../../helpers/error/AppError";
-import User from "../../infra/model/User";
+import User from "../../infra/models/User";
 import CryptoJs from 'crypto-js';
 import dotenv from 'dotenv';
 import { sendVerficationEmail } from "../../../../helpers/emailVerification/emailVerification";

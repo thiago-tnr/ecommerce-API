@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer'
 import dotenv from 'dotenv'
 import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcrypt"
-import UserVerification from '../../modules/User/infra/model/UserVerification';
+import UserVerification from '../../modules/User/infra/models/UserVerification';
 import { isEmpty } from '../isEmpty/Empty';
 import AppError from '../error/AppError';
 

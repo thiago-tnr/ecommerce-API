@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import UserVerification from "../../infra/model/UserVerification";
+import UserVerification from "../../infra/models/UserVerification";
 import moment from "moment-timezone";
-import User from "../../infra/model/User";
+import User from "../../infra/models/User";
 import bcrypt from "bcrypt"
 import path from 'path';
 import { isEmpty } from "../../../../helpers/isEmpty/Empty";
@@ -14,7 +14,7 @@ export class UserVerificationController{
 
         if (isEmpty(userVerification)) {
             let message = "Account record doesnt exists or has been verified already. Please sign up or log in"
-            return response.redirect(`/user/verified/${message}`)
+            return response.redirect(`/user/verify/${message}`)
         } 
         
         const {expiresIn} = userVerification[0];

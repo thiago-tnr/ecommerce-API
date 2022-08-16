@@ -1,4 +1,4 @@
-import { request, Router } from "express";
+import { request, response, Router } from "express";
 import { verifyTokenAndAdmin, verifyTokenAndAuthorization } from "../../../../middleware/middleware";
 import { createUserController } from "../../useCases/createUser";
 import { deleteUserController } from "../../useCases/deleteUser";
@@ -8,6 +8,8 @@ import { getUserStatsController } from "../../useCases/getUserStats";
 import { updateUserController } from "../../useCases/updateUser";
 import { userVerificationController } from "../../useCases/userVerification";
 import path from 'path';
+import { forgotPasswordController } from "../../useCases/forgotPassword";
+import { resetPasswordController } from "../../useCases/resetPassword";
 
 export const userRoutes = Router();
 
@@ -48,8 +50,15 @@ userRoutes.get('/verify/:userId/:uniqueString', async (request, response) => {
    return userVerificationController.handle(request, response)
 })
 
-userRoutes.get('/verified/:message', async (request, response) => {
-
+userRoutes.get('/verify/:message', async (request, response) => {
    return response.sendFile(path.join(__dirname, "./../../../../view/verifiedError.html"))
-  
 })
+
+userRoutes.post('/forgotPassword', async (request, response) => {
+   return forgotPasswordController.handle(request, response)
+})
+
+userRoutes.post('/resetPassword', async (request, response) => {
+   return resetPasswordController.handle(request, response)
+})
+

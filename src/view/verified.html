@@ -68,22 +68,7 @@
 
   <body></body>
   <script>
-    var query = location.search.slice(1);
-    var partes = query.split('&');
-    var data = {};
-    partes.forEach(function (parte) {
-    var chaveValor = parte.split('=');
-    var chave = chaveValor[0];
-    var valor = chaveValor[1];
-    data[chave] = valor;
-});
-
-console.log("========================================")
-
-console.log(data); 
-
     const queryString = window.location.search;
-    console.log(queryString)
     const urlParams = new URLSearchParams(queryString);
    
     const error = urlParams.get("error");

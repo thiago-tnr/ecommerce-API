@@ -1,5 +1,5 @@
 import AppError from "../../../../helpers/error/AppError"
-import User from "../../infra/model/User"
+import User from "../../infra/models/User"
 
 export default class GetAllUsersService {
     public async execute() {

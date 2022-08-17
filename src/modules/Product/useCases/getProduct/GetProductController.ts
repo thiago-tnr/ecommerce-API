@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
+import AppError from "../../../../helpers/error/AppError";
 import { GetProductService } from "./GetProductService";
-
-
 
 export class GetProductController {
 
@@ -9,7 +8,7 @@ export class GetProductController {
     async handle(request:Request, response:Response) {
         const getProductById = request.params.id
         if (!getProductById) {
-            return response.status(400).json({message: "No ID set params"})
+            throw new AppError("No ID set params", 400)
         }
         const getProduct = await this.getProductService.execute({getProductById})
         return response.json(getProduct)

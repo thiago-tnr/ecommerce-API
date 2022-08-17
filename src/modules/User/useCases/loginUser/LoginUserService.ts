@@ -1,6 +1,6 @@
 import AppError from "../../../../helpers/error/AppError";
 import User from "../../infra/models/User";
-import CryptoJs from 'crypto-js';
+import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -24,18 +24,17 @@ export default class LoginUserService{
             }
 
             if (!user) {
-                throw new AppError("Email or password wrong, try again", 403)
+                throw new AppError("Email or password wrong, or user not found, try again", 403)
             }
 
-            const hashedPassword = CryptoJs.AES.decrypt(
-                user.password,
-                process.env.PASS_SEC,
-            );
+            const hashedPassword = user.password
 
-            const passwordSetInDb = hashedPassword.toString(CryptoJs.enc.Utf8);
-            const passwordSetInBody = inputPassword;
+            const saltRounds  = parseInt(process.env.HASHED)
+            const hashedPasswordFromBody = await bcrypt.hash(inputPassword, saltRounds)
+            
+            const compareHashedPassword = await bcrypt.compare(hashedPassword, hashedPasswordFromBody)
 
-            if (passwordSetInBody != passwordSetInDb) {
+            if (!compareHashedPassword) {
                 throw new AppError("Email or password wrong, try again", 403)
             }
 

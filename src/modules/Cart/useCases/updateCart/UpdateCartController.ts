@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import AppError from "../../../../helpers/error/AppError";
 import { isEmpty } from "../../../../helpers/isEmpty/Empty";
 import { UpdateCartService } from "./UpdateCartService";
 
@@ -10,11 +11,11 @@ export class UpdateCartController {
         const cartId = request.params.id
 
         if (isEmpty(dataToUpdate)) {
-            return response.status(404).json('No data to update');
+            throw new AppError('No data to update', 404);
         }
 
         if(!cartId) {
-            return response.status(401).json('Missing params arg: ID');
+            throw new AppError('Missing params arg: ID', 400);
         }
 
         const cartUpdate = await this.updateCartService.execute({dataToUpdate, cartId});

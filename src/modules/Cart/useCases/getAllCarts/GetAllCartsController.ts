@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import AppError from "../../../../helpers/error/AppError";
 import { GetAllCartsService } from "./GetAllCartsService";
 
 export class GetAllCartsController {
@@ -8,7 +9,7 @@ export class GetAllCartsController {
         const cart = await this.getAllCartService.execute()
         
         if(!cart) {
-            return response.status(404).json(cart)
+            throw new AppError('Cart not found',404)
         }
         return response.status(200).json(cart)
     }

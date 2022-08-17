@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import AppError from "../../../../helpers/error/AppError";
 import { CreateProductsService } from "./CreateProductService";
 
 export class CreateProductController {
@@ -8,7 +9,7 @@ export class CreateProductController {
     async handle(request: Request, response: Response) {
      const {title, desc, img, categories, size, color, price, inStock} = request.body;
      if(!(title && desc && img && categories && size && color && price && inStock)){
-          return response.status(404).json({message: "Missing JSON args!"})
+        throw new AppError("Missing JSON args!", 400)
      }
      const typeCategories = typeof(categories)
      const typeSize = typeof(size)

@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import AppError from "../../../../helpers/error/AppError";
 import { isEmpty } from "../../../../helpers/isEmpty/Empty";
 import { DeleteCartService } from "./DeleteCartService";
 
@@ -10,7 +11,7 @@ export class DeleteCartController {
         const cartId = request.params.id;
 
         if (isEmpty(cartId)) {
-            return response.status(400).json("No Id set in params")
+            throw new AppError("No Id set in params", 400)
         }
         const cartDeleted = await this.deleteCartService.execute({cartId})
         return response.status(200).json({"Successfully deleted": cartDeleted})

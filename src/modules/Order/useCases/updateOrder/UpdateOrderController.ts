@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import AppError from "../../../../helpers/error/AppError";
 import { isEmpty } from "../../../../helpers/isEmpty/Empty";
 import { UpdateOrderService } from "./UpdateOrderService";
 
@@ -12,7 +13,7 @@ export class UpdateOrderController{
         const orderId = request.params.id
 
         if (isEmpty(updateOrder)) {
-            return response.status(404).json('Missing JSON args: status')    
+            throw new AppError('Missing JSON args: status', 400)    
         }
 
         const orderUpdated = await this.updateOrderService.execute({updateOrder, orderId})

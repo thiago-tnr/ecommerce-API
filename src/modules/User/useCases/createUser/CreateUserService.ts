@@ -1,8 +1,7 @@
 import AppError from "../../../../helpers/error/AppError";
 import User from "../../infra/models/User";
-import CryptoJs from 'crypto-js';
+import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
-import { sendVerficationEmail } from "../../../../helpers/emailVerification/emailVerification";
 
 dotenv.config();
 
@@ -22,12 +21,14 @@ export default class CreateUserService {
             throw new AppError('Email adress or userName already used', 409)
         }
        
+        const saltRounds  = parseInt(process.env.HASHED)
+        const hashedPassword = await bcrypt.hash(password, saltRounds)
+
         if (name && email && password ||isAdmin) {
             const newUser = new User({
                 username: name,
                 email,
-                password: CryptoJs.AES.encrypt(password, 
-                process.env.PASS_SEC as string).toString(),
+                password: hashedPassword,
                 isAdmin,
                 vefified
             })

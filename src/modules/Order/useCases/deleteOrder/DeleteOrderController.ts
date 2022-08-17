@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import AppError from "../../../../helpers/error/AppError";
 import { DeleteOrderService } from "./DeleteOrderService";
 
 
@@ -9,7 +10,7 @@ export class DeleteOrderController {
         const orderId = request.params.id
 
         if (!orderId) {
-            return response.status(404).json("Missing Params arg: ID")
+            throw new AppError("Missing Params arg: ID", 400)
         }
 
         const deletedOrderById = await this.deleteOrderService.execute({orderId})

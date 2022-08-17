@@ -11,11 +11,11 @@ export class UpdateProdcutController {
         const requestBody = request.body;
         const productId = request.params.id
         if (Object.entries(requestBody).length === 0) {
-            return response.status(404).json({message: "No data body defined, nothing to update"})
+            throw new AppError("No data body defined, nothing to update", 400)
         }
 
         if (!productId) {
-            return response.status(404).json({message: "No ID set params"})
+            throw new AppError("No ID set params", 400)
         }
 
         const updateProduct = await this.updateProductService.execute({requestBody, productId})

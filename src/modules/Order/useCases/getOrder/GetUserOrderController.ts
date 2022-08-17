@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import AppError from "../../../../helpers/error/AppError";
 import { GetUserOrderService } from "./GetUserOrderService";
 
 
@@ -8,7 +9,7 @@ export class GetUserOrderController {
         const userId = request.params.id
 
         if (!userId) {
-            return response.status(404).json("Missgin params args: ID")    
+            throw new AppError("Missgin params args: ID", 400)    
         }
 
         const getOrderByUserId = await this.getUserOrderService.execute({userId})

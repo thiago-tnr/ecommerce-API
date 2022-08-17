@@ -1,4 +1,5 @@
 import { ResetPasswordController } from "./ResetPasswordController";
+import { ResetPasswordService } from "./ResetPasswordService";
 
-
-export const resetPasswordController = new ResetPasswordController();
+const resetPasswordService = new ResetPasswordService();
+export const resetPasswordController = new ResetPasswordController(resetPasswordService);

@@ -1,6 +1,7 @@
 import { NextFunction, Request, request, Response } from "express"
 import Jwt, { decode } from "jsonwebtoken";
 import dotenv from "dotenv"
+import AppError from "../helpers/error/AppError";
 
 dotenv.config();
 /**
@@ -37,14 +38,14 @@ export const refreshToken = (req: Request, res: Response, next: NextFunction) =>
   if (refreshToken) {
       Jwt.verify(refreshToken, process.env.REFRESH_JWT_SEC as string, (err: any, user: any) => {
           if (err) {
-              res.status(403).json("Invalid Token");
+            throw new AppError('Invalid Token', 403)
           } else { 
               const tokenRefreshed = Jwt.sign({name: user.name}, process.env.JWT_SEC, {expiresIn: '60s'})
               return res.status(200).json({message : "Token refreshed sucessfuly", tokenRefreshed });
           }
       })
   } else {
-      return res.status(401).json("You are not authenticated");
+    throw new AppError('You are not authenticated', 401)
   }
 }
 
@@ -61,7 +62,7 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction) =>{
             }
         })
     } else {
-        return res.status(401).json("You are not authenticated");
+      throw new AppError("You are not authenticated", 401);
     }
 }
 
@@ -70,7 +71,7 @@ export const verifyTokenAndAuthorization = (req: Request, res: Response, next: N
       if (req.user.id === req.params.id || req.user.isAdmin) {
         next();
       } else {
-        res.status(403).json("You are not alowed to do that!");
+        throw new AppError("You are not alowed to do that!", 403);
       }
     });
   };
@@ -80,7 +81,7 @@ export const verifyTokenAndAdmin = (req: Request, res: Response, next: NextFunct
       if (req.user.isAdmin) {
         next();
       } else {
-        res.status(403).json("Only admins alowed to do that!");
+        throw new AppError("Only admins alowed to do that!", 403);
       }
     });
   };

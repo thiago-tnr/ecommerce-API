@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import AppError from "../../../../helpers/error/AppError";
 import { isEmpty } from "../../../../helpers/isEmpty/Empty";
 import { CreateOrderService } from "./CreateOrderService";
 
@@ -7,7 +8,7 @@ export class CreateOrderController {
     async handle(request: Request, response: Response) {
 
         if(isEmpty(request.body)) {
-            return response.status(404).json({message: "No data body defined"})
+            throw new AppError("No data body defined", 400)
         }
 
         const {userId,amount,address} = request.body
@@ -15,9 +16,9 @@ export class CreateOrderController {
         
         if(!(userId && amount && address && productId && quantity)) {
             if (quantity == 0) {
-                return response.status(404).json({message: "Quantity not can be equals 0"})
+                throw new AppError("Quantity not can be equals 0", 400)
             }
-            return response.status(404).json({message: "Missing JSON args!"})
+            throw new AppError("Missing JSON args!", 404)
         }
 
         const newOrder = await this.createOrderService.execute({userId,product:{productId,quantity},amount, address})

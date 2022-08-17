@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import AppError from "../../../../helpers/error/AppError";
 import { DeleteProductService } from "./DeleteProdcutService";
 
 
@@ -10,7 +11,7 @@ export class DeleteProductContrller {
         const productId = request.params.id
 
         if (!productId) {
-            return response.status(400).json({message: "No ID set params"})
+            throw new AppError("No ID set params", 400)
         }
 
         const deleteProductById = await this.deleteProductService.execute({productId})

@@ -1,13 +1,17 @@
 import express, { NextFunction, Request, Response } from "express";
 import 'express-async-errors';
+import swaggerUI from 'swagger-ui-express'
 import { ConnectionDB } from "./database/connection";
 import { indexRoutes } from "./routes/index.routes";
 import AppError from "./helpers/error/AppError";
+import swaggerFile from './swagger.json'
 
 
 const app = express();
 
 app.use(express.json());
+
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup())
 
 app.use(indexRoutes);
 app.use((err:Error, request:Request, response:Response, next:NextFunction)=>{

@@ -19,5 +19,4 @@ indexRoutes.use('/products',verifyTokenAndAdmin, productsRouter)
 indexRoutes.use('/find-products', productsRouterNotAuth)
 indexRoutes.use('/cart', cartRoutes)
 indexRoutes.use('/order/', orderRoutes)
-
 indexRoutes.post('/refresh-token', refreshToken)

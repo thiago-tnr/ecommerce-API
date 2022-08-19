@@ -1,0 +1,40 @@
+{
+    "openapi" : "3.0.0",
+    "info" : {
+        "title" : "Ecommerce API",
+        "description" : "This is an API e-commerce with fake, but working, payment method",
+        "version" : "1.0.0",
+        "contact":{
+            "email" : "tnr.rocha@gmail.com"
+        }
+    },
+    "paths" : {
+        "/user" :{
+            "post" : {
+                "sumary": "Create user",
+                "description" : "Create a new user",
+                "requestBody": {
+                    "content" : {
+                        "application/json": {
+                            "schema":{
+                                "type": "object",
+                                "properties" : {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description" :{
+                                        "type": "string"
+                                    },
+                                    "example" : {
+                                        "name" : "Thiago",
+                                        "description" : "asafafas"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } 
+        }
+    }
+}

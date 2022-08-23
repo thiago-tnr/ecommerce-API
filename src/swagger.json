@@ -9,32 +9,71 @@
         }
     },
     "paths" : {
-        "/user" :{
+        "/user/create-user" :{
             "post" : {
                 "sumary": "Create user",
-                "description" : "Create a new user",
+                "description" : "Create a new user, to buy in the story. After creating this user, it is necessary to confirm the registration by email. check your inbox and see if you have received the confirmation email",
+                "tags" : ["User"],
+                "security" : [{"bearerAuth": [] }],
                 "requestBody": {
                     "content" : {
                         "application/json": {
-                            "schema":{
-                                "type": "object",
-                                "properties" : {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "description" :{
-                                        "type": "string"
-                                    },
-                                    "example" : {
-                                        "name" : "Thiago",
-                                        "description" : "asafafas"
-                                    }
-                                }
+                            "schema" : {
+                                "$ref": "#/components/schemas/User"
+                            },  
+                            "example" : {
+                                "name" : "Thiago Swagger",
+                                "email" : "tnr.rocha@gmail.com",
+                                "password" : "12345678",
+                                "isAdmin" : true
                             }
                         }
                     }
+                },
+                "responses": {
+                    "202" : {
+                        "description": "User created, Confirmation PENDDING "
+                    },
+                    "409 - Get User Email" : {
+                        "description": "Email adress already used"
+                    },
+                    "409 - Get User Name" : {
+                        "description": "UserName already used"
+                    },
+                    "400" : {
+                        "description": "Password must be at least 8 characters long"
+                    },
+                    "400 - Link Verification" : {
+                        "description": "Not possible to create the vefication"
+                    }
                 }
-            } 
+            }
+        } 
+    },
+    "components" : {
+        "schemas" : {
+            "User" : {
+                "type":"object",
+                "username": {
+                    "type": "string"
+                },
+                "email" :{
+                    "type": "string"
+                },
+                "password" :{
+                    "type": "string"
+                },
+                "isAdmin" :{
+                    "type": "boolean"
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth" : {
+                "type" : "http",
+                "scheme" : "bearer",
+                "bearerFormat" : "JWT"
+            }
         }
-    }
+    }   
 }

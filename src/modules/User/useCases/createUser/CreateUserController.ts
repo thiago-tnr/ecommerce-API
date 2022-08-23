@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 import { CreateUserVerificationService } from "./CreateUserVerificationService";
 import CreateUserService from "./CreateUserService";
+import AppError from "../../../../helpers/error/AppError";
 
 /**
- * []validar os dados vindo do body
- * [] validar password
- * [] caracteres minimos para o password
- * [] regex para verificar se tem caracteres especiais
- * [] validar email
+ * [x]validar os dados vindo do body
+ * [x] validar password
+ * [x] caracteres minimos para o password
+ * [x] validar email
  */
 export class CreateUserController {
     constructor(
@@ -16,6 +16,14 @@ export class CreateUserController {
 
     async handle (request: Request, response: Response) {
     const {name, isAdmin, email, password} = request.body;
+
+    if(!name && !isAdmin && !email && !password) {
+        throw new AppError('Missing JSON args', 404)
+    }
+
+    if (password.length < 8){
+        throw new AppError('Password must be at least 8 characters long', 400)
+    }
     const user = await this.createUserService.execute({name, email, password, isAdmin});
 
     let userId = user[1].toString();
@@ -23,7 +31,7 @@ export class CreateUserController {
     let sendEmail = await this.createUserVerificationService.execute({userId, email})
     
     if (sendEmail) {
-        return response.status(202).json({"message" : "PENDDING"}); 
+        return response.status(202).json({"message" : "User created, Confirmation PENDDING"}); 
     }
   
     }

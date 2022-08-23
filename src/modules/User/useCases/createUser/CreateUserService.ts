@@ -15,12 +15,17 @@ interface Request{
 export default class CreateUserService {
     public async execute({name, email, password, isAdmin, vefified}: Request) {
         const checkUserExists = await User.findOne({email: email})
+        
+        if (checkUserExists) {
+            throw new AppError('Email adress already used', 409)
+        }
+        
         const checkUserNameExists = await User.findOne({username: name})
 
-        if (checkUserExists && checkUserNameExists) {
-            throw new AppError('Email adress or userName already used', 409)
+        if (checkUserNameExists) {
+            throw new AppError('UserName already used', 409)
         }
-       
+
         const saltRounds  = parseInt(process.env.HASHED)
         const hashedPassword = await bcrypt.hash(password, saltRounds)
 

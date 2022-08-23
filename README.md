@@ -40,6 +40,6 @@ This link can help you to this: https://www.youtube.com/watch?v=thAP7Fvrql4
 - MongoDB
 - Express
 - Nodemailer
-
+- Swagger - it's not finished
 ## Tech Stack
 If you need support, contact me: tnr.rocha@gmail.com

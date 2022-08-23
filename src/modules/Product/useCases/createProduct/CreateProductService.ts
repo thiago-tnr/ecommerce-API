@@ -4,7 +4,6 @@ import Product from "../../infra/model/Product"
 interface Request {
     title: string,
     desc: string,
-    img: string,
     categories: object,
     size: object,
     color: object,
@@ -18,10 +17,10 @@ interface Request {
  * [] dar saída a cada venda
  */
 export class CreateProductsService {
-   public async execute({title, desc, img, categories, size, color, price, inStock}: Request){
+   public async execute({title, desc, categories, size, color, price, inStock}: Request){
 
         const checkProductTitleExists = await Product.findOne({title})
-
+        const img = "https://www.google.com.br/logos/google.jpg";
         if (checkProductTitleExists) {
             throw new AppError('Title already used', 409)
         }

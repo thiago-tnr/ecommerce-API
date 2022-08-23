@@ -28,12 +28,9 @@ export default class LoginUserService{
             }
 
             const hashedPassword = user.password
-
-            const saltRounds  = parseInt(process.env.HASHED)
-            const hashedPasswordFromBody = await bcrypt.hash(inputPassword, saltRounds)
             
-            const compareHashedPassword = await bcrypt.compare(hashedPassword, hashedPasswordFromBody)
-
+            const compareHashedPassword = await bcrypt.compare(inputPassword, hashedPassword)
+            console.log(compareHashedPassword)
             if (!compareHashedPassword) {
                 throw new AppError("Email or password wrong, try again", 403)
             }

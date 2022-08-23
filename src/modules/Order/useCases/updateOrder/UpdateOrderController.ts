@@ -11,7 +11,6 @@ export class UpdateOrderController{
     async handle(request: Request, response: Response) {
         const updateOrder = request.body
         const orderId = request.params.id
-
         if (isEmpty(updateOrder)) {
             throw new AppError('Missing JSON args: status', 400)    
         }

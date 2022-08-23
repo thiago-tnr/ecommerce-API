@@ -20,13 +20,17 @@ userRoutes.post("/create-user", async (request, response) => {
     return createUserController.handle(request, response)
 })
 
+userRoutes.get('/verify/:userId/:uniqueString', async (request, response) => {
+   return userVerificationController.handle(request, response)
+})
+
 //essa rota é usada para atualizar o password
 /**
  * [] Verificar nova senha
  * [] nova não pode ser igual a antiga
  * [] salvar nova senha
  */
-userRoutes.put("/update-user/:id", verifyTokenAndAuthorization, async (request, response) => {
+userRoutes.put("/update-user-password/:id", verifyTokenAndAuthorization, async (request, response) => {
    return updateUserController.handle(request, response)
 })
 
@@ -44,10 +48,6 @@ userRoutes.get("/find-all-users", verifyTokenAndAdmin, async (request, response)
 
 userRoutes.get("/user-stats", verifyTokenAndAdmin, async (request, response) => {
    return getUserStatsController.handle(request, response)
-})
-
-userRoutes.get('/verify/:userId/:uniqueString', async (request, response) => {
-   return userVerificationController.handle(request, response)
 })
 
 userRoutes.get('/verify/:message', async (request, response) => {

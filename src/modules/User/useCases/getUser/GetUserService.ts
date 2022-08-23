@@ -7,7 +7,7 @@ interface Request {
 
 export default class GetUserService {
     public async execute({id}: Request) {
-        if(id){
+        if(id.length === 24){
             const findOneUserById = await User.findById(id)    
             if (findOneUserById) {
                 return findOneUserById
@@ -15,5 +15,6 @@ export default class GetUserService {
                 throw new AppError("User not found", 404)
             }
         }
+        throw new AppError("Invalid Id", 404)
     }
 }

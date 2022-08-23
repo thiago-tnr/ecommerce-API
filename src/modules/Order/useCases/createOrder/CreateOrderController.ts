@@ -12,7 +12,7 @@ export class CreateOrderController {
         }
 
         const {userId,amount,address} = request.body
-        const {product:{productId, quantity}} = request.body
+        const {products:{productId, quantity}} = request.body
         
         if(!(userId && amount && address && productId && quantity)) {
             if (quantity == 0) {
@@ -21,7 +21,7 @@ export class CreateOrderController {
             throw new AppError("Missing JSON args!", 404)
         }
 
-        const newOrder = await this.createOrderService.execute({userId,product:{productId,quantity},amount, address})
+        const newOrder = await this.createOrderService.execute({userId,products:{productId,quantity},amount, address})
         return response.status(201).json(newOrder);
     }
 }

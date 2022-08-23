@@ -3,7 +3,7 @@ import Order from "../../infra/model/Order";
 
 interface Request {
     userId: string;
-    product: {
+    products: {
         productId:string;
         quantity: number
     };
@@ -12,10 +12,10 @@ interface Request {
 }
 
 export class CreateOrderService {
-    async execute({userId,product:{productId,quantity},amount,address}:Request) {
+    async execute({userId,products:{productId,quantity},amount,address}:Request) {
         const newOrder = await new Order({
             userId,
-            product:{
+            products:{
                 productId,
                 quantity
             },

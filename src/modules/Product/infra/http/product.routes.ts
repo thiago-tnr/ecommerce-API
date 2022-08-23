@@ -25,7 +25,3 @@ productsRouter.post('/update-product/:id', (request, response) =>{
 productsRouter.delete('/delete-product/:id', (request, response) => {
     return deleteProductController.handle(request, response)    
 })
-
-productsRouter.get('/product/:id', (request, response) => {
-    return getProductController.handle(request, response)
-})

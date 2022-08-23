@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { refreshToken, verifyTokenAndAdmin } from "../middleware/middleware";
+import { refreshToken, verifyTokenAndAdmin, verifyTokenAndAuthorization } from "../middleware/middleware";
 import { cartRoutes } from "../modules/Cart/infra/http/cart.routes";
 import { orderRoutes } from "../modules/Order/infra/http/order.routes";
 import { productsRouter } from "../modules/Product/infra/http/product.routes";
@@ -18,5 +18,5 @@ indexRoutes.use('/login', authRouter);
 indexRoutes.use('/products',verifyTokenAndAdmin, productsRouter)
 indexRoutes.use('/find-products', productsRouterNotAuth)
 indexRoutes.use('/cart', cartRoutes)
-indexRoutes.use('/order/', orderRoutes)
+indexRoutes.use('/order/', verifyTokenAndAuthorization, orderRoutes)
 indexRoutes.post('/refresh-token', refreshToken)

@@ -14,7 +14,7 @@
                 "sumary": "Create user",
                 "description" : "Create a new user, to buy in the story. After creating this user, it is necessary to confirm the registration by email. check your inbox and see if you have received the confirmation email",
                 "tags" : ["User"],
-                "security" : [{"bearerAuth": [] }],
+
                 "requestBody": {
                     "content" : {
                         "application/json": {
@@ -48,7 +48,46 @@
                     }
                 }
             }
-        } 
+        },
+        "/user/verify/{userId}/{uniqueString}" :{
+            "get" : {
+                "sumary": "Verify created user",
+                "description" : "After creating the user, a confirmation email will arrive, when clicking on the validation link, a new tab will open. Take this link and run it in Insomnia or take the userId and the uniqueString and use in the swagger",
+                "tags" : ["User"],
+                "parameters" : [
+                    {
+                        "name" : "userId",
+                        "in" : "path",
+                        "description" : "User Id to validate de cadastration",
+                        "required" : true
+                    },
+                    {
+                        "name" : "uniqueString",
+                        "in" : "path",
+                        "description" : "User Id to validate de cadastration",
+                        "required" : true
+                    }
+                ],
+                
+                "responses": {
+                    "202" : {
+                        "description": "User created, Confirmation PENDDING "
+                    },
+                    "409 - Get User Email" : {
+                        "description": "Email adress already used"
+                    },
+                    "409 - Get User Name" : {
+                        "description": "UserName already used"
+                    },
+                    "400" : {
+                        "description": "Password must be at least 8 characters long"
+                    },
+                    "400 - Link Verification" : {
+                        "description": "Not possible to create the vefication"
+                    }
+                }
+            }
+        }
     },
     "components" : {
         "schemas" : {

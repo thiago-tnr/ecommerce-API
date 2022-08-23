@@ -28,7 +28,7 @@ User can manage or not, but some requests only admin can access (page manager/AP
 Is this API. i'm used the MongoDB Atlas Database. Is necessary to create account in the DB atlas, and create a new cluster. 
 This link can help you to this: https://www.youtube.com/watch?v=esKNjzDZItQ
 
-## Email to Nodemailes
+## Email to Nodemailer
 
 To send email, this API use the gmail. Is necessary to configure your account to this. In the .end you need set your e-mail and the hashed password configuration in the security of accounts gmail.
 This link can help you to this: https://www.youtube.com/watch?v=thAP7Fvrql4

@@ -8,7 +8,6 @@ export class GetAllCartsService {
         if (isEmpty(carts)) {
             throw new AppError("No carts created", 404)
         }
-        console.log(carts)
         return carts;
     }
 }

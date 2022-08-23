@@ -10,17 +10,17 @@ interface Request {
 export class UpdateOrderService {
     async execute({updateOrder, orderId}: Request){
 
-        // const orderIsPaid = await Order.findById({_id: orderId})
+        const orderIsPaid = await Order.findById({_id: orderId})
 
-        // if(orderIsPaid.status === "Paied"){
-        //     throw new AppError("Not possible to update this order, because is paid", 400)
-        // }
+        if(orderIsPaid.status === "Paied"){
+            throw new AppError("Not possible to update this order, because is paid", 400)
+        }
 
         const changeStatus = await Order.findByIdAndUpdate(
             orderId,
-            
-            {$push: updateOrder});
-        console.log(changeStatus)
+            {$push: updateOrder}
+        );
+
         if (!changeStatus) {
             throw new AppError("Not possible to update the status", 400)
         }

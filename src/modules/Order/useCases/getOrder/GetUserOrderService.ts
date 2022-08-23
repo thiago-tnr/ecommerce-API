@@ -11,7 +11,6 @@ export class GetUserOrderService{
     async execute({userId}: Request){
 
         const getOrderByUserId = await Order.find({userId:userId})
-        console.log(getOrderByUserId)
         if (!getOrderByUserId) {
             throw new AppError("Order not found", 404)
         }

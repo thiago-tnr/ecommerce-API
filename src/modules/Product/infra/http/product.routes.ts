@@ -14,7 +14,6 @@ productsRouter.get('/ping', (request, response) => {
 
 productsRouter.post('/', upload.single("img"), (request, response) =>{
     const {img}:any = request;
-    console.log(img)
     return createProductController.handle(request, response)
 })
 

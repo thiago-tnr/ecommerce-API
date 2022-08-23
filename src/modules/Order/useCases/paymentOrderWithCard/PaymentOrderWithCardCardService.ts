@@ -31,7 +31,7 @@ export class PaymentOrderWithCardService{
         
         const validateNumberCart = number.replace(/[^0-9]+/g, '');
 
-        let cartoes = {
+        let cards = {
             visa      : /^4[0-9]{12}(?:[0-9]{3})/,
             mastercard : /^5[1-5][0-9]{14}/,
             diners    : /^3(?:0[0-5]|[68][0-9])[0-9]{11}/,
@@ -43,10 +43,10 @@ export class PaymentOrderWithCardService{
             aura      : /^(5078\d{2})(\d{2})(\d{11})$/
         };
         
-        function testarCC(validateNumberCart: string, cartoes: any) {
-            for (let cartao in cartoes) 
-                if (validateNumberCart.match(cartoes[cartao])) 
-                    return cartao;
+        function testarCC(validateNumberCart: string, cards: any) {
+            for (let card in cards) 
+                if (validateNumberCart.match(cards[card])) 
+                    return card;
             return false;
         }
         
@@ -56,7 +56,7 @@ export class PaymentOrderWithCardService{
          let cardIsValid;
 
         [valid, invalid].forEach(cartValid => 
-            cardIsValid = (testarCC(cartValid, cartoes))
+            cardIsValid = (testarCC(cartValid, cards))
         );
 
         if (cardIsValid) {
@@ -67,9 +67,16 @@ export class PaymentOrderWithCardService{
                     if (orderPaiment.status === "Paied") {
                         throw new AppError('This order has already been paid', 403)
                     }
-                    await Order.updateOne({_id: orderId}, {status: "Paied"})
+                    const orderWithNewStatus = await Order.updateOne({_id: orderId}, {status: "Paied"})
+
+                    if (orderWithNewStatus){
+                        const orderPaidStatus = await Order.findById({_id: orderId})
+                        return [orderPaidStatus, cardIsValid]
+                    } else {
+                        throw new AppError('An error occurred paying for this order', 402)
+                    }
+                   
                 }
-            return [orderPaiment, cardIsValid]
         } else {
             throw new AppError('Payment denied', 403)
         }

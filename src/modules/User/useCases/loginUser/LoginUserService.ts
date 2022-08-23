@@ -30,7 +30,7 @@ export default class LoginUserService{
             const hashedPassword = user.password
             
             const compareHashedPassword = await bcrypt.compare(inputPassword, hashedPassword)
-            console.log(compareHashedPassword)
+
             if (!compareHashedPassword) {
                 throw new AppError("Email or password wrong, try again", 403)
             }

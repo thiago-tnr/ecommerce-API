@@ -4,7 +4,7 @@ import moment from "moment-timezone";
 import User from "../../infra/models/User";
 import bcrypt from "bcrypt"
 import path from 'path';
-import { isEmpty } from "../../../../helpers/isEmpty/Empty";
+import { isEmpty } from "../../../../helpers/empty/Empty";
 
 export class UserVerificationController{
     async handle(request: Request, response: Response ){

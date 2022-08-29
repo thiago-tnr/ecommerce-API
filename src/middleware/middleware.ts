@@ -1,37 +1,6 @@
-import { NextFunction, Request, request, Response } from "express"
-import Jwt, { decode } from "jsonwebtoken";
-import dotenv from "dotenv"
-import AppError from "../helpers/error/AppError";
-
-dotenv.config();
-/**
- * [] implementar o refresh token
- */
-
-// export const middlewareAuth = {
-//     private: (req: Request, res: Response, next: NextFunction) => {
-//         let sucess = false;
-//         if (req.headers.authorization) {
-//             const [authJwt, token] = req.headers.authorization.split('')
-//             try {
-//                 if(authJwt === "Bearer"){
-//                     Jwt.verify(
-//                         token, 
-//                         process.env.JWT_SECRET_KEY as string,
-//                     );
-//                 }
-//                 sucess = true;
-//             } catch (error) {
-//                 console.log(error)
-//             }
-//         }
-//         if(sucess){
-//             next();
-//         }else{
-//             res.status(401).json("Unauthorized");
-//         }
-//     }
-// }
+import { NextFunction, Request, Response } from "express"
+import Jwt from "jsonwebtoken";
+import AppError from "../helpers/appError/AppError";
 
 export const refreshToken = (req: Request, res: Response, next: NextFunction) =>{
   const refreshToken: any = req.body.refreshToken;

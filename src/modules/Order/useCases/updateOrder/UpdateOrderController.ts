@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import AppError from "../../../../helpers/error/AppError";
-import { isEmpty } from "../../../../helpers/isEmpty/Empty";
+import AppError from "../../../../helpers/appError/AppError";
+import { isEmpty } from "../../../../helpers/empty/Empty";
 import { UpdateOrderService } from "./UpdateOrderService";
 
 

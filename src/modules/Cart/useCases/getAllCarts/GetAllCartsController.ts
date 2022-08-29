@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import AppError from "../../../../helpers/error/AppError";
+import AppError from "../../../../helpers/appError/AppError";
 import { GetAllCartsService } from "./GetAllCartsService";
 
 export class GetAllCartsController {

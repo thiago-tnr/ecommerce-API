@@ -1,12 +1,10 @@
 import nodemailer from 'nodemailer'
-import dotenv from 'dotenv'
 import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcrypt"
 import UserVerification from '../../modules/User/infra/models/UserVerification';
-import { isEmpty } from '../isEmpty/Empty';
-import AppError from '../error/AppError';
-
-dotenv.config();
+import { isEmpty } from '../empty/Empty';
+import AppError from '../appError/AppError';
+import { logger } from '../logger/Logger';
 
 type Verification = {
     userId: string;
@@ -25,10 +23,10 @@ export const sendVerficationEmail = ({userId, email}: Verification, response: Re
 
     transporter.verify((err, success) => {
         if (err) {
-            console.log(err)
+            logger.info(err)
         } else {
-            console.log('Ready for msg')
-            console.log(success)
+            logger.info('Ready for msg')
+            logger.info(success)
         }
     })
     

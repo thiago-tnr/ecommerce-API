@@ -1,12 +1,10 @@
 import nodemailer from 'nodemailer'
-import dotenv from 'dotenv'
 import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcrypt"
 import UserVerification from '../../infra/models/UserVerification';
-import { isEmpty } from '../../../../helpers/isEmpty/Empty';
-import AppError from '../../../../helpers/error/AppError';
-
-dotenv.config();
+import { isEmpty } from '../../../../helpers/empty/Empty';
+import AppError from '../../../../helpers/appError/AppError';
+import { logger } from '../../../../helpers/logger/Logger';
 
 interface Request {
     userId: string, 
@@ -25,10 +23,10 @@ export class CreateUserVerificationService{
 
         transporter.verify((err, success) => {
             if (err) {
-                console.log(err)
+                logger.info(err)
             } else {
-                console.log('Ready for msg')
-                console.log(success)
+                logger.info('Ready for msg')
+                logger.info(success)
             }
         })
 

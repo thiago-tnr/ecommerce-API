@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import AppError from '../../../../helpers/error/AppError';
+import AppError from '../../../../helpers/appError/AppError';
 import User from '../../infra/models/User';
 
 interface IUpdateUser{

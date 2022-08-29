@@ -2,11 +2,8 @@ import PasswordReset from "../../infra/models/PasswordReset";
 import moment from "moment-timezone";
 import bcrypt from "bcrypt"
 import User from "../../infra/models/User";
-import { isEmpty } from "../../../../helpers/isEmpty/Empty";
-import dotenv from 'dotenv'
-import AppError from "../../../../helpers/error/AppError";
-
-dotenv.config();
+import { isEmpty } from "../../../../helpers/empty/Empty";
+import AppError from "../../../../helpers/appError/AppError";
 
 interface Request{
     user: string; 

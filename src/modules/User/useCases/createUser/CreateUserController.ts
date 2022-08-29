@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { CreateUserVerificationService } from "./CreateUserVerificationService";
 import CreateUserService from "./CreateUserService";
-import AppError from "../../../../helpers/error/AppError";
+import AppError from "../../../../helpers/appError/AppError";
 
 /**
  * [x]validar os dados vindo do body

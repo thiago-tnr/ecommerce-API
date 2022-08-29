@@ -1,8 +1,5 @@
 import { Request, Response } from "express";
 import GetUserService from "./GetUserService";
-import dotenv from 'dotenv'
-
-dotenv.config();
 
 export class GetUserController{
 

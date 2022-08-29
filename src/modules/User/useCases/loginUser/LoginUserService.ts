@@ -1,9 +1,6 @@
-import AppError from "../../../../helpers/error/AppError";
+import AppError from "../../../../helpers/appError/AppError";
 import User from "../../infra/models/User";
 import bcrypt from 'bcrypt';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 interface Request {
     email: string,

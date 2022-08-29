@@ -1,4 +1,4 @@
-import AppError from "../../../../helpers/error/AppError"
+import AppError from "../../../../helpers/appError/AppError"
 import Cart from "../../infra/model/Cart"
 
 interface Request {

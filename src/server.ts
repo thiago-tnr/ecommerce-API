@@ -3,8 +3,12 @@ import 'express-async-errors';
 import swaggerUI from 'swagger-ui-express'
 import { ConnectionDB } from "./database/connection";
 import { indexRoutes } from "./routes/index.routes";
-import AppError from "./helpers/error/AppError";
+import AppError from "./helpers/appError/AppError";
 import swaggerFile from './swagger.json'
+import dotenv from "dotenv";
+import { logger } from "./helpers/logger/Logger";
+
+dotenv.config();
 
 
 const app = express();
@@ -21,7 +25,7 @@ app.use((err:Error, request:Request, response:Response, next:NextFunction)=>{
             message: err.message,
         })
     }
-    console.error(err);
+    logger.info(err);
     return response.status(500).json({
         status: 'error',
         message: 'Internal server error',
@@ -31,5 +35,5 @@ app.use((err:Error, request:Request, response:Response, next:NextFunction)=>{
 ConnectionDB();
 
 app.listen(3030, () => {
-    console.log("Server is running !!!");
+    logger.info("Server is running !!!");
 })

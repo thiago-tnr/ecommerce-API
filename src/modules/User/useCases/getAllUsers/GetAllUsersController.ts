@@ -1,9 +1,5 @@
 import { Request, Response } from "express";
 import GetUserService from "./GetAllUsersService";
-import dotenv from 'dotenv'
-
-dotenv.config();
-
 export class GetAllUsersController{
 
     constructor(private getUserService: GetUserService){}

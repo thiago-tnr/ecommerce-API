@@ -1,4 +1,4 @@
-import AppError from "../../../../helpers/error/AppError";
+import AppError from "../../../../helpers/appError/AppError";
 import Order from "../../infra/model/Order"
 
 

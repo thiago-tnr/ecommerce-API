@@ -7,11 +7,11 @@ import { GetUserCartService } from "./GetUserCartService";
 export class GetUserCartContrller {
     constructor(private getUserCartService: GetUserCartService){}
     async handle(request: Request, response: Response) {
-        const {userId} = request.params;
-        if (!userId) {
+        const {id} = request.params;
+        if (!id) {
             throw new AppError("Missing query params, set ID", 404)
         }
-        const getUserCart = await this.getUserCartService.execute({userId})
+        const getUserCart = await this.getUserCartService.execute({id})
         return response.status(200).json(getUserCart)
     }
 }

@@ -2,11 +2,11 @@ import AppError from "../../../../helpers/appError/AppError"
 import Cart from "../../infra/model/Cart"
 
 interface Request {
-    userId : string
+    id : string
 }
 export class GetUserCartService{
-    async execute({userId}: Request){
-        const getUserCart = await Cart.findOne({userId})
+    async execute({id}: Request){
+        const getUserCart = await Cart.findOne({id})
         if (!getUserCart) {
             throw new AppError("User cart not found", 404)
         }

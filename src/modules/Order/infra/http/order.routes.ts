@@ -13,20 +13,20 @@ orderRoutes.get('/ping', (request, response) => {
     return response.json({message: "pong"});
 })
 
-orderRoutes.post('/new', verifyToken,(request, response) =>{
+orderRoutes.post('/', verifyToken,(request, response) =>{
     return createOrderController.handle(request, response)
 })
 
-orderRoutes.get('/find/:id', (request, response) =>{
-    return getUserOrderController.handle(request, response)
-})
-
-orderRoutes.put('/new-product/:id', (request, reseponse)=>{
+orderRoutes.put('/:id', (request, reseponse)=>{
     return updateOrderController.handle(request, reseponse)
 })
 
 orderRoutes.get('/all', verifyTokenAndAdmin, (request, response) =>{
     return getAllOrdersController.handle(request, response)
+})
+
+orderRoutes.get('/:id', (request, response) =>{
+    return getUserOrderController.handle(request, response)
 })
 
 orderRoutes.get('/incomes', verifyTokenAndAdmin, (request, response) =>{

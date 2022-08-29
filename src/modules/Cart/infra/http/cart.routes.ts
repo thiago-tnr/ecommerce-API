@@ -12,22 +12,22 @@ cartRoutes.get('/ping', (request, response) => {
     return response.json({message: "pong"});
 })
 
-cartRoutes.post('/new', verifyToken, (request, response) =>{
+cartRoutes.post('/', verifyToken, (request, response) =>{
     return createCartController.handle(request, response)
 })
 
-cartRoutes.delete('/delete/:id', verifyTokenAndAuthorization, (request, response) =>{
+cartRoutes.delete('/:id', verifyTokenAndAuthorization, (request, response) =>{
     return deleteCartController.handle(request, response)
 })
 
-cartRoutes.get('/find-cart/:userId', verifyTokenAndAuthorization, (request, response) =>{
-    return getUserCartContrller.handle(request, response)
-})
-
-cartRoutes.get('/all-carts', verifyTokenAndAdmin, (request, response) => {
+cartRoutes.get('/carts', verifyTokenAndAdmin, (request, response) => {
     return getAllCartsController.handle(request, response)
 })
 
-cartRoutes.put('/update/:id', verifyTokenAndAuthorization, (request, response) =>{
+cartRoutes.get('/:id', verifyTokenAndAuthorization, (request, response) =>{
+    return getUserCartContrller.handle(request, response)
+})
+
+cartRoutes.put('/:id', verifyTokenAndAuthorization, (request, response) =>{
     return updateCartController.handle(request, response)
 })
